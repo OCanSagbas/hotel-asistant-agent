@@ -40,23 +40,24 @@ Arayüze anında [http://localhost:7860](http://localhost:7860) adresinden ulaş
 
 ---
 
-## 📂 Klasör Yapısı (Folder Architecture)
-Proje, kurumsal seviyede *Separation of Concerns* (Sorumlulukların Ayrılığı) prensiplerine göre tasarlanmıştır:
+## 📂 Agent Klasör Yapısı ve Dallanmalar
+
 ```text
-📦hotel-asistant-agent
- ┣ 📂agent                   # LangGraph AI Beyni (Mimarinin Kalbi)
- ┃ ┣ 📂mappers               # API yanıtlarını özetleyen, ID'leri gizleyen filtre katmanı
- ┃ ┣ 📂nodes                 # Akış adımları: LLM karar (agent_node) ve araç çalıştırma (tool_node)
- ┃ ┣ 📂tools                 # Dış dünya fonksiyonları (Oda Arama, Rezervasyon, Transfer)
- ┃ ┣ 📜graph.py              # Tüm düğümleri bağlayan LangGraph iş akışı şeması
- ┃ ┗ 📜state.py              # Hafıza yapısı (Sohbet geçmişi ve ID'lerin ayrıştırılması)
- ┣ 📜.dockerignore           # Docker derlemesinde hariç tutulacaklar
- ┣ 📜.gitignore              # Git geçmişinden gizlenecek şifre ve çöpler (.env vb.)
- ┣ 📜Dockerfile              # Uygulamayı izole çalıştıran konteyner talimatları
- ┣ 📜README.md               # Proje belgelendirme ve kullanım kılavuzu
- ┣ 📜app.py                  # Gradio ile yazılmış Web Arayüzü (Kullanıcı Ekranı)
- ┣ 📜main.py                 # Konsol veya alternatif API giriş noktası
- ┗ 📜requirements.txt        # Proje bağımlılıkları ve Python kütüphaneleri
+agent/
+├── mappers/
+│   ├── booking_mapper.py
+│   ├── search_mapper.py
+│   └── transfer_mapper.py
+├── nodes/
+│   ├── agent_node.py
+│   ├── response_node.py
+│   └── tool_node.py
+├── tools/
+│   ├── add_service.py
+│   ├── book_room.py
+│   └── search_rooms.py
+├── graph.py
+└── state.py
 ```
 
 ---
